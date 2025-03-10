@@ -58,6 +58,14 @@ target_include_directories(MAVLink
         ${mavlink_SOURCE_DIR}/common
 )
 
+add_library(mavlink_ascon STATIC
+    ${mavlink_SOURCE_DIR}/aead.c
+    ${mavlink_SOURCE_DIR}/printstate.c
+)
+target_include_directories(mavlink_ascon PUBLIC ${mavlink_SOURCE_DIR})
+target_link_libraries(MAVLink PRIVATE mavlink_ascon)
+
+
 # if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 #   target_compile_options(comm PRIVATE -Wno-address-of-packed-member)
 # endif()
